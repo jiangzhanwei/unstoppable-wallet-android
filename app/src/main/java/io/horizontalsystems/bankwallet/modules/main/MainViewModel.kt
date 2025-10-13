@@ -76,7 +76,6 @@ class MainViewModel(
     private val items: List<MainNavigation>
         get() = if (marketsTabEnabled) {
             listOf(
-                MainNavigation.Market,
                 MainNavigation.Balance,
                 MainNavigation.Transactions,
                 MainNavigation.Settings,
@@ -242,13 +241,6 @@ class MainViewModel(
     }
 
     private fun getNavItem(item: MainNavigation, selected: Boolean) = when (item) {
-        MainNavigation.Market -> {
-            MainModule.NavigationViewItem(
-                mainNavItem = item,
-                selected = selected,
-                enabled = true,
-            )
-        }
 
         MainNavigation.Transactions -> {
             MainModule.NavigationViewItem(
@@ -274,6 +266,8 @@ class MainViewModel(
                 enabled = true,
             )
         }
+
+        else -> throw IllegalStateException("Unsupported navigation item: $item")
     }
 
     private fun getTabIndexToOpen(): Int {
@@ -332,7 +326,7 @@ class MainViewModel(
                     }
                 }
 
-                tab = MainNavigation.Market
+                tab = MainNavigation.Balance
             }
 
             deeplinkString.startsWith("wc:") -> {
