@@ -75,7 +75,16 @@ private fun ManageWalletsScreen(
     viewModel: ManageWalletsViewModel,
     restoreSettingsViewModel: RestoreSettingsViewModel
 ) {
-    val coinItems by viewModel.viewItemsLiveData.observeAsState()
+    val coinItems by viewModel.viewItemsLiveData.observeAsState(initial = null)
+
+    // 过滤列表，只显示与 "sol" (Solana) 相关的代币
+    val filteredCoinItems = coinItems?.filter { viewItem ->
+        val coinCode = viewItem.item.coin.code
+        val blockchainName = viewItem.item.blockchain.name
+
+        coinCode.equals("SOL", ignoreCase = true) || blockchainName.contains("Solana", ignoreCase = true)
+    }
+
 
     restoreSettingsViewModel.openBirthdayHeightConfig?.let { token ->
         restoreSettingsViewModel.birthdayHeightConfigOpened()
@@ -135,7 +144,7 @@ private fun ManageWalletsScreen(
                         Spacer(modifier = Modifier.height(12.dp))
                         HsDivider()
                     }
-                    items(it) { viewItem ->
+                    items(filteredCoinItems ?: emptyList()) { viewItem ->
                         CoinCell(
                             viewItem = viewItem,
                             onItemClick = {
