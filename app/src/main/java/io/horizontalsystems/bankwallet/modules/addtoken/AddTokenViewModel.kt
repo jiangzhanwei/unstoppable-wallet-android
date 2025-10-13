@@ -33,9 +33,13 @@ class AddTokenViewModel(private val addTokenService: AddTokenService) :
         caution = caution
     )
 
-    val blockchains by addTokenService::blockchains
+    // ✅ 只保留 Solana
+    val blockchains by lazy {
+        addTokenService.blockchains.filter { it.type == BlockchainType.Solana }
+    }
 
-    var selectedBlockchain by mutableStateOf(blockchains.first { it.type == BlockchainType.Ethereum })
+    // ✅ 默认选中 Solana
+    var selectedBlockchain by mutableStateOf(blockchains.first())
         private set
 
     private var fetchCustomCoinsJob: Job? = null
