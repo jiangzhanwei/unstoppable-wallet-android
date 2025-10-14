@@ -68,7 +68,7 @@ fun SelectContactScreen(navController: NavController, input: SelectContactFragme
     ) {
         if (uiState.items.isEmpty()) {
             Column(modifier = Modifier.padding(it)) {
-                InfoText(text = stringResource(id = R.string.Transactions_Filter_ChooseContact_Hint))
+                //InfoText(text = stringResource(id = R.string.Transactions_Filter_ChooseContact_Hint))
                 InfoErrorMessageDefault(
                     painter = painterResource(id = R.drawable.ic_user_24),
                     text = stringResource(R.string.Transactions_Filter_ChooseContact_NoSuitableContact)
@@ -77,7 +77,7 @@ fun SelectContactScreen(navController: NavController, input: SelectContactFragme
         } else {
             LazyColumn(modifier = Modifier.padding(it)) {
                 item {
-                    InfoText(text = stringResource(id = R.string.Transactions_Filter_ChooseContact_Hint))
+//                    InfoText(text = stringResource(id = R.string.Transactions_Filter_ChooseContact_Hint))
                 }
                 items(uiState.items) { contact ->
                     CellContact(contact, uiState.selected) {
