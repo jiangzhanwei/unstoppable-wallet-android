@@ -366,6 +366,11 @@ class BalanceViewModel(
         return adapterManager.getReceiveAdapterForWallet(wallet)?.receiveAddress
     }
 
+    fun getWalletForBlockchain(blockchain: BlockchainType): Wallet? {
+        val balanceItems = service.balanceItemsFlow.value ?: return null
+        return balanceItems.firstOrNull { it.wallet.token.blockchainType == blockchain }?.wallet
+    }
+
     sealed class SyncError {
         class NetworkNotAvailable : SyncError()
         class Dialog(val wallet: Wallet, val errorMessage: String?) : SyncError()

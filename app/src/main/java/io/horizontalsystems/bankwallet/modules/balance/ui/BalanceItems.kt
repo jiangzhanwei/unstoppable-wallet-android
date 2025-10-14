@@ -95,6 +95,8 @@ import io.horizontalsystems.bankwallet.uiv3.components.menu.MenuGroup
 import io.horizontalsystems.bankwallet.uiv3.components.menu.MenuItemX
 import io.horizontalsystems.bankwallet.uiv3.components.tabs.TabsSectionButtons
 import io.horizontalsystems.core.helpers.HudHelper
+import io.horizontalsystems.marketkit.models.BlockchainType
+import io.horizontalsystems.bankwallet.modules.receive.ReceiveFragment
 
 @Composable
 fun NoteWarning(
@@ -295,27 +297,36 @@ fun BalanceItems(
                             title = stringResource(R.string.Balance_Receive),
                             enabled = true,
                             onClick = {
-                                when (val receiveAllowedState =
-                                    viewModel.getReceiveAllowedState()) {
-                                    ReceiveAllowedState.Allowed -> {
-                                        navController.slideFromRight(R.id.receiveChooseCoinFragment)
-
-                                        stat(
-                                            page = StatPage.Balance,
-                                            event = StatEvent.Open(StatPage.ReceiveTokenList)
-                                        )
-                                    }
-
-                                    is ReceiveAllowedState.BackupRequired -> {
-                                        showBackupRequiredDialog(
-                                            account = receiveAllowedState.account,
-                                            navController = navController
-                                        )
-                                    }
-
-                                    null -> Unit
+                                val solanaWallet = viewModel.getWalletForBlockchain(BlockchainType.Solana)
+                                if (solanaWallet != null) {
+                                    navController.slideFromRight(
+                                        R.id.receiveFragment,
+                                        ReceiveFragment.Input(solanaWallet)
+                                    )
                                 }
                             }
+//                            onClick = {
+//                                when (val receiveAllowedState =
+//                                    viewModel.getReceiveAllowedState()) {
+//                                    ReceiveAllowedState.Allowed -> {
+//                                        navController.slideFromRight(R.id.receiveChooseCoinFragment)
+//
+//                                        stat(
+//                                            page = StatPage.Balance,
+//                                            event = StatEvent.Open(StatPage.ReceiveTokenList)
+//                                        )
+//                                    }
+//
+//                                    is ReceiveAllowedState.BackupRequired -> {
+//                                        showBackupRequiredDialog(
+//                                            account = receiveAllowedState.account,
+//                                            navController = navController
+//                                        )
+//                                    }
+//
+//                                    null -> Unit
+//                                }
+//                            }
                         )
                         BalanceActionButton(
                             variant = ButtonVariant.Secondary,
