@@ -542,17 +542,17 @@ private fun ButtonsRow(
                 )
             },
         )
-        if (viewItem.swapVisible) {
-            BalanceActionButton(
-                variant = ButtonVariant.Secondary,
-                icon = R.drawable.ic_swap_circle_24,
-                title = stringResource(R.string.Swap),
-                onClick = {
-                    navController.slideFromRight(R.id.multiswap, viewItem.wallet.token)
-
-                    stat(page = StatPage.TokenPage, event = StatEvent.Open(StatPage.Swap))
-                },
-            )
-        }
+//        if (viewItem.swapVisible) {
+//            BalanceActionButton(
+//                variant = ButtonVariant.Secondary,
+//                icon = R.drawable.ic_swap_circle_24,
+//                title = stringResource(R.string.Swap),
+//                onClick = {
+//                    navController.slideFromRight(R.id.multiswap, viewItem.wallet.token)
+//
+//                    stat(page = StatPage.TokenPage, event = StatEvent.Open(StatPage.Swap))
+//                },
+//            )
+//        }
     }
 }
