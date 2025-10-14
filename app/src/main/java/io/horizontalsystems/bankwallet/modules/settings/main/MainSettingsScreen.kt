@@ -115,39 +115,39 @@ private fun SettingSections(
     val context = LocalContext.current
     val isFDroidBuild = BuildConfig.FDROID_BUILD
 
-    val banners = buildList<@Composable () -> Unit> {
-        if (uiState.showPremiumBanner) {
-            add {
-                SubscriptionBanner(
-                    onClick = {
-                        navController.slideFromBottom(R.id.buySubscriptionFragment)
-                        stat(
-                            page = StatPage.Settings,
-                            event = StatEvent.OpenPremium(StatPremiumTrigger.Banner)
-                        )
-                    }
-                )
-            }
-        }
-        if (isFDroidBuild) {
-            add {
-                DonateBanner(
-                    onClick = {
-                        navController.slideFromBottom(R.id.whyDonateFragment)
-                    }
-                )
-            }
-        }
-        add {
-            GameBanner(
-                onClick = {
-                    LinkHelper.openLinkInAppBrowser(context, "https://t.me/BeUnstoppable_bot/app")
-                }
-            )
-        }
-    }
-
-    BannerCarousel(banners = banners)
+//    val banners = buildList<@Composable () -> Unit> {
+//        if (uiState.showPremiumBanner) {
+//            add {
+//                SubscriptionBanner(
+//                    onClick = {
+//                        navController.slideFromBottom(R.id.buySubscriptionFragment)
+//                        stat(
+//                            page = StatPage.Settings,
+//                            event = StatEvent.OpenPremium(StatPremiumTrigger.Banner)
+//                        )
+//                    }
+//                )
+//            }
+//        }
+//        if (isFDroidBuild) {
+//            add {
+//                DonateBanner(
+//                    onClick = {
+//                        navController.slideFromBottom(R.id.whyDonateFragment)
+//                    }
+//                )
+//            }
+//        }
+//        add {
+//            GameBanner(
+//                onClick = {
+//                    LinkHelper.openLinkInAppBrowser(context, "https://t.me/BeUnstoppable_bot/app")
+//                }
+//            )
+//        }
+//    }
+//
+//    BannerCarousel(banners = banners)
 
     VSpacer(12.dp)
 
@@ -166,20 +166,22 @@ private fun SettingSections(
                     stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.ManageWallets))
                 }
             )
-        }, {
-            HsSettingCell(
-                R.string.BlockchainSettings_Title,
-                R.drawable.ic_blocks_20,
-                onClick = {
-                    navController.slideFromRight(R.id.blockchainSettingsFragment)
-
-                    stat(
-                        page = StatPage.Settings,
-                        event = StatEvent.Open(StatPage.BlockchainSettings)
-                    )
-                }
-            )
-        }, {
+        },
+//            {
+//            HsSettingCell(
+//                R.string.BlockchainSettings_Title,
+//                R.drawable.ic_blocks_20,
+//                onClick = {
+//                    navController.slideFromRight(R.id.blockchainSettingsFragment)
+//
+//                    stat(
+//                        page = StatPage.Settings,
+//                        event = StatEvent.Open(StatPage.BlockchainSettings)
+//                    )
+//                }
+//            )
+//        },
+            {
             HsSettingCell(
                 R.string.Settings_SecurityCenter,
                 R.drawable.ic_security,
@@ -190,17 +192,19 @@ private fun SettingSections(
                     stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.Security))
                 }
             )
-        }, {
-            HsSettingCell(
-                R.string.Settings_Privacy,
-                R.drawable.ic_eye_20,
-                onClick = {
-                    navController.slideFromRight(R.id.privacySettingsFragment)
-
-                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.Privacy))
-                }
-            )
-        }, {
+        },
+//            {
+//            HsSettingCell(
+//                R.string.Settings_Privacy,
+//                R.drawable.ic_eye_20,
+//                onClick = {
+//                    navController.slideFromRight(R.id.privacySettingsFragment)
+//
+//                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.Privacy))
+//                }
+//            )
+//        },
+            {
             HsSettingCell(
                 R.string.Settings_WalletConnect,
                 R.drawable.ic_wallet_connect_20,
@@ -278,18 +282,18 @@ private fun SettingSections(
                     }
                 )
             }
-            if (!BuildConfig.FDROID_BUILD) {
-                add {
-                    HsSettingCell(
-                        R.string.Settings_Subscription,
-                        R.drawable.ic_star_24,
-                        value = if (uiState.hasSubscription) stringResource(R.string.SettingsSubscription_Active) else null,
-                        onClick = {
-                            navController.slideFromRight(R.id.subscriptionFragment)
-                        }
-                    )
-                }
-            }
+//            if (!BuildConfig.FDROID_BUILD) {
+//                add {
+//                    HsSettingCell(
+//                        R.string.Settings_Subscription,
+//                        R.drawable.ic_star_24,
+//                        value = if (uiState.hasSubscription) stringResource(R.string.SettingsSubscription_Active) else null,
+//                        onClick = {
+//                            navController.slideFromRight(R.id.subscriptionFragment)
+//                        }
+//                    )
+//                }
+//            }
             add {
                 HsSettingCell(
                     R.string.Contacts,
@@ -321,50 +325,50 @@ private fun SettingSections(
         }
     )
 
-    VSpacer(24.dp)
+//    VSpacer(24.dp)
+//
+//    if (isFDroidBuild) {
+//        PremiumHeader(R.string.Premium_TitleForDroid)
+//    } else {
+//        PremiumHeader()
+//    }
 
-    if (isFDroidBuild) {
-        PremiumHeader(R.string.Premium_TitleForDroid)
-    } else {
-        PremiumHeader()
-    }
-
-    SectionPremiumUniversalLawrence {
-        HsSettingCell(
-            title = if(isFDroidBuild) R.string.Settings_Support else R.string.Settings_VipSupport,
-            icon = R.drawable.ic_support_yellow_24,
-            iconTint = ComposeAppTheme.colors.jacob,
-            onClick = {
-                if (isFDroidBuild) {
-                    LinkHelper.openLinkInAppBrowser(context, viewModel.fdroidSupportLink)
-                } else {
-                    navController.paidAction(VIPSupport) {
-                        openVipSupport.invoke()
-                    }
-                }
-
-                stat(
-                    page = StatPage.Settings,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.VipSupport)
-                )
-            }
-        )
-        HsDivider()
-        HsSettingCell(
-            title = R.string.SettingsAddressChecker_Title,
-            icon = R.drawable.ic_radar_24,
-            iconTint = ComposeAppTheme.colors.jacob,
-            onClick = {
-                navController.paidAction(AddressBlacklist) {
-                    navController.slideFromRight(R.id.addressCheckerFragment)
-                }
-                stat(
-                    page = StatPage.Settings,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.AddressChecker)
-                )
-            }
-        )
-    }
+//    SectionPremiumUniversalLawrence {
+//        HsSettingCell(
+//            title = if(isFDroidBuild) R.string.Settings_Support else R.string.Settings_VipSupport,
+//            icon = R.drawable.ic_support_yellow_24,
+//            iconTint = ComposeAppTheme.colors.jacob,
+//            onClick = {
+//                if (isFDroidBuild) {
+//                    LinkHelper.openLinkInAppBrowser(context, viewModel.fdroidSupportLink)
+//                } else {
+//                    navController.paidAction(VIPSupport) {
+//                        openVipSupport.invoke()
+//                    }
+//                }
+//
+//                stat(
+//                    page = StatPage.Settings,
+//                    event = StatEvent.OpenPremium(StatPremiumTrigger.VipSupport)
+//                )
+//            }
+//        )
+//        HsDivider()
+//        HsSettingCell(
+//            title = R.string.SettingsAddressChecker_Title,
+//            icon = R.drawable.ic_radar_24,
+//            iconTint = ComposeAppTheme.colors.jacob,
+//            onClick = {
+//                navController.paidAction(AddressBlacklist) {
+//                    navController.slideFromRight(R.id.addressCheckerFragment)
+//                }
+//                stat(
+//                    page = StatPage.Settings,
+//                    event = StatEvent.OpenPremium(StatPremiumTrigger.AddressChecker)
+//                )
+//            }
+//        )
+//    }
 
 
     VSpacer(32.dp)
@@ -381,100 +385,101 @@ private fun SettingSections(
                     stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.AboutApp))
                 }
             )
-        }, {
-            HsSettingCell(
-                R.string.Settings_RateUs,
-                R.drawable.ic_rateus_24,
-                onClick = {
-                    RateAppManager.openPlayMarket(context)
+        },))
+//        {
+//            HsSettingCell(
+//                R.string.Settings_RateUs,
+//                R.drawable.ic_rateus_24,
+//                onClick = {
+//                    RateAppManager.openPlayMarket(context)
+//
+//                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.RateUs))
+//                }
+//            )
+//        }, {
+//            HsSettingCell(
+//                R.string.Settings_ShareThisWallet,
+//                R.drawable.ic_share_24,
+//                onClick = {
+//                    shareAppLink(uiState.appWebPageLink, context)
+//
+//                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.TellFriends))
+//                }
+//            )
+//        }, {
+//            HsSettingCell(
+//                R.string.Settings_Faq,
+//                R.drawable.ic_faq_20,
+//                onClick = {
+//                    navController.slideFromRight(R.id.faqListFragment)
+//                }
+//            )
+//        }, {
+//            HsSettingCell(
+//                R.string.Guides_Title,
+//                R.drawable.ic_academy_20,
+//                onClick = {
+//                    navController.slideFromRight(R.id.academyFragment)
+//                }
+//            )
+//        })
+//    )
+//
+//    VSpacer(24.dp)
+//
+//    Row(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(horizontal = 32.dp)
+//            .height(32.dp),
+//        verticalAlignment = Alignment.CenterVertically,
+//    ) {
+//        subhead1_grey(text = stringResource(id = R.string.Settings_JoinUnstoppables).uppercase())
+//    }
+//    CellUniversalLawrenceSection(
+//        listOf({
+//            HsSettingCell(
+//                R.string.Settings_Telegram,
+//                R.drawable.ic_telegram_24,
+//                onClick = {
+//                    LinkHelper.openLinkInAppBrowser(context, App.appConfigProvider.appTelegramLink)
+//
+//                    stat(
+//                        page = StatPage.Settings,
+//                        event = StatEvent.Open(StatPage.ExternalTelegram)
+//                    )
+//                }
+//            )
+//        }, {
+//            HsSettingCell(
+//                R.string.Settings_Twitter,
+//                R.drawable.ic_twitter_24,
+//                onClick = {
+//                    LinkHelper.openLinkInAppBrowser(context, App.appConfigProvider.appTwitterLink)
+//
+//                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.ExternalTwitter))
+//                }
+//            )
+//        })
+//    )
 
-                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.RateUs))
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Settings_ShareThisWallet,
-                R.drawable.ic_share_24,
-                onClick = {
-                    shareAppLink(uiState.appWebPageLink, context)
-
-                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.TellFriends))
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Settings_Faq,
-                R.drawable.ic_faq_20,
-                onClick = {
-                    navController.slideFromRight(R.id.faqListFragment)
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Guides_Title,
-                R.drawable.ic_academy_20,
-                onClick = {
-                    navController.slideFromRight(R.id.academyFragment)
-                }
-            )
-        })
-    )
-
-    VSpacer(24.dp)
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp)
-            .height(32.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        subhead1_grey(text = stringResource(id = R.string.Settings_JoinUnstoppables).uppercase())
-    }
-    CellUniversalLawrenceSection(
-        listOf({
-            HsSettingCell(
-                R.string.Settings_Telegram,
-                R.drawable.ic_telegram_24,
-                onClick = {
-                    LinkHelper.openLinkInAppBrowser(context, App.appConfigProvider.appTelegramLink)
-
-                    stat(
-                        page = StatPage.Settings,
-                        event = StatEvent.Open(StatPage.ExternalTelegram)
-                    )
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Settings_Twitter,
-                R.drawable.ic_twitter_24,
-                onClick = {
-                    LinkHelper.openLinkInAppBrowser(context, App.appConfigProvider.appTwitterLink)
-
-                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.ExternalTwitter))
-                }
-            )
-        })
-    )
-
-    VSpacer(32.dp)
-
-    CellUniversalLawrenceSection(
-        listOf {
-            HsSettingCell(
-                R.string.Settings_Donate,
-                R.drawable.ic_heart_24,
-                onClick = {
-                    navController.slideFromRight(R.id.donateTokenSelectFragment)
-
-                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.Donate))
-                }
-            )
-        }
-    )
-
-    VSpacer(32.dp)
+//    VSpacer(32.dp)
+//
+//    CellUniversalLawrenceSection(
+//        listOf {
+//            HsSettingCell(
+//                R.string.Settings_Donate,
+//                R.drawable.ic_heart_24,
+//                onClick = {
+//                    navController.slideFromRight(R.id.donateTokenSelectFragment)
+//
+//                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.Donate))
+//                }
+//            )
+//        }
+//    )
+//
+//    VSpacer(32.dp)
 }
 
 @Composable
@@ -540,36 +545,36 @@ private fun SettingsFooter(appVersion: String, companyWebPage: String) {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        caption_grey(
-            text = stringResource(
-                R.string.Settings_InfoTitleWithVersion,
-                appVersion
-            ).uppercase()
-        )
-        HsDivider(
-            modifier = Modifier
-                .width(100.dp)
-                .padding(top = 8.dp, bottom = 4.5.dp)
-            )
-        Text(
-            text = stringResource(R.string.Settings_InfoSubtitle),
-            style = ComposeAppTheme.typography.micro,
-            color = ComposeAppTheme.colors.grey,
-        )
-        Image(
-            modifier = Modifier
-                .padding(top = 32.dp)
-                .size(32.dp)
-                .clickable {
-                    LinkHelper.openLinkInAppBrowser(context, companyWebPage)
-                },
-            painter = painterResource(id = R.drawable.ic_company_logo),
-            contentDescription = null,
-        )
-        caption_grey(
-            modifier = Modifier.padding(top = 12.dp, bottom = 32.dp),
-            text = stringResource(R.string.Settings_CompanyName),
-        )
+//        caption_grey(
+//            text = stringResource(
+//                R.string.Settings_InfoTitleWithVersion,
+//                appVersion
+//            ).uppercase()
+//        )
+//        HsDivider(
+//            modifier = Modifier
+//                .width(100.dp)
+//                .padding(top = 8.dp, bottom = 4.5.dp)
+//            )
+//        Text(
+//            text = stringResource(R.string.Settings_InfoSubtitle),
+//            style = ComposeAppTheme.typography.micro,
+//            color = ComposeAppTheme.colors.grey,
+//        )
+//        Image(
+//            modifier = Modifier
+//                .padding(top = 32.dp)
+//                .size(32.dp)
+//                .clickable {
+//                    LinkHelper.openLinkInAppBrowser(context, companyWebPage)
+//                },
+//            painter = painterResource(id = R.drawable.ic_company_logo),
+//            contentDescription = null,
+//        )
+//        caption_grey(
+//            modifier = Modifier.padding(top = 12.dp, bottom = 32.dp),
+//            text = stringResource(R.string.Settings_CompanyName),
+//        )
     }
 }
 
