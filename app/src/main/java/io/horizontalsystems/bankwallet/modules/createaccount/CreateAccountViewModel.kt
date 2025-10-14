@@ -141,13 +141,15 @@ class CreateAccountViewModel(
 
     private fun activateDefaultWallets(account: Account) {
         val tokenQueries = listOfNotNull(
-            TokenQuery(BlockchainType.Bitcoin, TokenType.Derived(TokenType.Derivation.Bip84)),
-            TokenQuery(BlockchainType.Ethereum, TokenType.Native),
-            TokenQuery(BlockchainType.Monero, TokenType.Native),
-            TokenQuery(BlockchainType.Tron, TokenType.Native),
-            TokenQuery(BlockchainType.BinanceSmartChain, TokenType.Native),
-            TokenQuery(BlockchainType.Tron, TokenType.Eip20("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")),//USDT(TRC20)
-            TokenQuery(BlockchainType.Ethereum, TokenType.Eip20("0xdac17f958d2ee523a2206206994597c13d831ec7")),//USDT(erc20)
+            TokenQuery(BlockchainType.Solana, TokenType.Native)
+//            TokenQuery(BlockchainType.Bitcoin, TokenType.Derived(TokenType.Derivation.Bip84)),
+//            TokenQuery(BlockchainType.Ethereum, TokenType.Native),
+//            TokenQuery(BlockchainType.Monero, TokenType.Native),
+//            TokenQuery(BlockchainType.Tron, TokenType.Native),
+//            TokenQuery(BlockchainType.BinanceSmartChain, TokenType.Native),
+//            TokenQuery(BlockchainType.Tron, TokenType.Eip20("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")),//USDT(TRC20)
+//            TokenQuery(BlockchainType.Ethereum, TokenType.Eip20("0xdac17f958d2ee523a2206206994597c13d831ec7")),//USDT(erc20)
+//
         )
         walletActivator.activateWallets(account, tokenQueries)
     }
