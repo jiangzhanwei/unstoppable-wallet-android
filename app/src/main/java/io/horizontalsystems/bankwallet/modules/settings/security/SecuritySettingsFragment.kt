@@ -86,48 +86,48 @@ private fun SecurityCenterScreen(
 
             VSpacer(height = 32.dp)
 
-            CellUniversalLawrenceSection {
-                SecurityCenterCell(
-                    start = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_off_24),
-                            tint = ComposeAppTheme.colors.grey,
-                            modifier = Modifier.size(24.dp),
-                            contentDescription = null
-                        )
-                    },
-                    center = {
-                        body_leah(
-                            text = stringResource(id = R.string.Appearance_BalanceAutoHide),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    },
-                    end = {
-                        HsSwitch(
-                            checked = uiState.balanceAutoHideEnabled,
-                            onCheckedChange = {
-                                securitySettingsViewModel.onSetBalanceAutoHidden(it)
-                            }
-                        )
-                    }
-                )
-            }
-            InfoText(
-                text = stringResource(R.string.Appearance_BalanceAutoHide_Description),
-                paddingBottom = 32.dp
-            )
-
-            DuressPasscodeBlock(
-                securitySettingsViewModel,
-                navController
-            )
-            InfoText(
-                text = stringResource(R.string.SettingsSecurity_DuressPinDescription),
-                paddingBottom = 32.dp
-            )
-
-            VSpacer(height = 32.dp)
+//            CellUniversalLawrenceSection {
+//                SecurityCenterCell(
+//                    start = {
+//                        Icon(
+//                            painter = painterResource(id = R.drawable.ic_off_24),
+//                            tint = ComposeAppTheme.colors.grey,
+//                            modifier = Modifier.size(24.dp),
+//                            contentDescription = null
+//                        )
+//                    },
+//                    center = {
+//                        body_leah(
+//                            text = stringResource(id = R.string.Appearance_BalanceAutoHide),
+//                            maxLines = 1,
+//                            overflow = TextOverflow.Ellipsis,
+//                        )
+//                    },
+//                    end = {
+//                        HsSwitch(
+//                            checked = uiState.balanceAutoHideEnabled,
+//                            onCheckedChange = {
+//                                securitySettingsViewModel.onSetBalanceAutoHidden(it)
+//                            }
+//                        )
+//                    }
+//                )
+//            }
+//            InfoText(
+//                text = stringResource(R.string.Appearance_BalanceAutoHide_Description),
+//                paddingBottom = 32.dp
+//            )
+//
+//            DuressPasscodeBlock(
+//                securitySettingsViewModel,
+//                navController
+//            )
+//            InfoText(
+//                text = stringResource(R.string.SettingsSecurity_DuressPinDescription),
+//                paddingBottom = 32.dp
+//            )
+//
+//            VSpacer(height = 32.dp)
         }
     }
 }
