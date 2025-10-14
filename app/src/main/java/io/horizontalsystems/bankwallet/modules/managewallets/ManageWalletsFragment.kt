@@ -17,9 +17,6 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,7 +50,6 @@ import io.horizontalsystems.bankwallet.ui.compose.components.VSpacer
 import io.horizontalsystems.bankwallet.ui.compose.components.body_leah
 import io.horizontalsystems.bankwallet.ui.compose.components.subhead2_grey
 import io.horizontalsystems.marketkit.models.Token
-import kotlin.text.contains
 
 class ManageWalletsFragment : BaseComposeFragment() {
 
@@ -79,27 +75,7 @@ private fun ManageWalletsScreen(
     viewModel: ManageWalletsViewModel,
     restoreSettingsViewModel: RestoreSettingsViewModel
 ) {
-    // 1. 定义一个状态来保存用户输入的搜索文本
-    var filterText by remember { mutableStateOf("") } // 如果没有 remember，需要 import androidx.compose.runtime.*
-
-    val coinItems by viewModel.viewItemsLiveData.observeAsState(initial = null)
-
-    // 2. 第一层过滤：只保留 Solana 相关的代币
-    val solanaOnlyItems = coinItems?.filter { viewItem ->
-        val coinCode = viewItem.item.coin.code
-        val blockchainName = viewItem.item.blockchain.name
-        coinCode.equals("SOL", true) || blockchainName.contains("Solana", true)
-    }
-
-    // 3. 第二层过滤：根据用户输入的 filterText，在 solanaOnlyItems 内部进行搜索
-    val finalItems = if (filterText.isBlank()) {
-        solanaOnlyItems
-    } else {
-        solanaOnlyItems?.filter { viewItem ->
-            viewItem.item.coin.name.contains(filterText, true) ||
-                    viewItem.item.coin.code.contains(filterText, true)
-        }
-    }
+    val coinItems by viewModel.viewItemsLiveData.observeAsState()
 
     restoreSettingsViewModel.openBirthdayHeightConfig?.let { token ->
         restoreSettingsViewModel.birthdayHeightConfigOpened()
@@ -121,7 +97,6 @@ private fun ManageWalletsScreen(
     Column(
         modifier = Modifier.background(color = ComposeAppTheme.colors.tyler)
     ) {
-        // 4. 修改 SearchBar
         SearchBar(
             title = stringResource(R.string.ManageCoins_title),
             searchHintText = stringResource(R.string.ManageCoins_Search),
@@ -132,63 +107,75 @@ private fun ManageWalletsScreen(
                         icon = R.drawable.ic_add_24,
                         onClick = {
                             navController.slideFromRight(R.id.addTokenFragment)
-                            stat(page = StatPage.CoinManager, event = StatEvent.Open(StatPage.AddToken))
+
+                            stat(
+                                page = StatPage.CoinManager,
+                                event = StatEvent.Open(StatPage.AddToken)
+                            )
                         }
-                    )
-                )
+                    ))
             } else {
                 listOf()
             },
             onClose = { navController.popBackStack() },
             onSearchTextChanged = { text ->
-                // 更新我们自己的搜索文本状态
-                filterText = text
+                viewModel.updateFilter(text)
             }
         )
 
-        // 5. 使用最终的 finalItems 列表
-        if (finalItems == null) {
-            // 加载中
-        } else if (finalItems.isEmpty()) {
-            ListEmptyView(
-                text = stringResource(R.string.ManageCoins_NoResults),
-                icon = R.drawable.ic_not_found
-            )
-        } else {
-            LazyColumn {
-                item {
-                    Spacer(modifier = Modifier.height(12.dp))
-                    HsDivider()
-                }
-                items(finalItems) { viewItem ->
-                    CoinCell(
-                        viewItem = viewItem,
-                        onItemClick = {
-                            if (viewItem.enabled) {
-                                viewModel.disable(viewItem.item)
-                                stat(page = StatPage.CoinManager, event = StatEvent.DisableToken(viewItem.item))
-                            } else {
-                                viewModel.enable(viewItem.item)
-                                stat(page = StatPage.CoinManager, event = StatEvent.EnableToken(viewItem.item))
+        coinItems?.let {
+            if (it.isEmpty()) {
+                ListEmptyView(
+                    text = stringResource(R.string.ManageCoins_NoResults),
+                    icon = R.drawable.ic_not_found
+                )
+            } else {
+                LazyColumn {
+                    item {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        HsDivider()
+                    }
+                    items(it) { viewItem ->
+                        CoinCell(
+                            viewItem = viewItem,
+                            onItemClick = {
+                                if (viewItem.enabled) {
+                                    viewModel.disable(viewItem.item)
+
+                                    stat(
+                                        page = StatPage.CoinManager,
+                                        event = StatEvent.DisableToken(viewItem.item)
+                                    )
+                                } else {
+                                    viewModel.enable(viewItem.item)
+
+                                    stat(
+                                        page = StatPage.CoinManager,
+                                        event = StatEvent.EnableToken(viewItem.item)
+                                    )
+                                }
+                            },
+                            onInfoClick = {
+                                navController.slideFromBottom(
+                                    R.id.configuredTokenInfo,
+                                    viewItem.item
+                                )
+
+                                stat(
+                                    page = StatPage.CoinManager,
+                                    event = StatEvent.OpenTokenInfo(viewItem.item)
+                                )
                             }
-                        },
-                        onInfoClick = {
-                            navController.slideFromBottom(
-                                R.id.configuredTokenInfo,
-                                viewItem.item
-                            )
-                            stat(page = StatPage.CoinManager, event = StatEvent.OpenTokenInfo(viewItem.item))
-                        }
-                    )
-                }
-                item {
-                    VSpacer(height = 32.dp)
+                        )
+                    }
+                    item {
+                        VSpacer(height = 32.dp)
+                    }
                 }
             }
         }
     }
 }
-
 
 @Composable
 private fun CoinCell(

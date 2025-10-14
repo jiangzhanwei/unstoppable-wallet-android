@@ -10,7 +10,9 @@ import io.horizontalsystems.bankwallet.core.iconPlaceholder
 import io.horizontalsystems.bankwallet.core.imageUrl
 import io.horizontalsystems.bankwallet.modules.market.ImageSource
 import io.horizontalsystems.bankwallet.modules.restoreaccount.restoreblockchains.CoinViewItem
+import io.horizontalsystems.marketkit.models.BlockchainType // 确保导入 BlockchainType
 import io.horizontalsystems.marketkit.models.Token
+import kotlinx.coroutines.flow.map // 确保导入 map
 import kotlinx.coroutines.launch
 
 class ManageWalletsViewModel(
@@ -22,9 +24,14 @@ class ManageWalletsViewModel(
 
     init {
         viewModelScope.launch {
-            service.itemsFlow.collect {
-                sync(it)
-            }
+            // 在原始数据流上增加一步过滤，只允许Solana代币通过
+            service.itemsFlow
+                .map { items ->
+                    items.filter { it.token.blockchainType is BlockchainType.Solana }
+                }
+                .collect { solanaItems ->
+                    sync(solanaItems)
+                }
         }
     }
 
