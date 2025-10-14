@@ -130,7 +130,7 @@ class BalanceViewModel(
         TotalService.State.Hidden -> TotalUIState.Hidden
         is TotalService.State.Visible -> TotalUIState.Visible(
             primaryAmountStr = getPrimaryAmount(state, state.showFullAmount) ?: "---",
-            secondaryAmountStr = getSecondaryAmount(state, state.showFullAmount) ?: "---",
+            secondaryAmountStr = getSecondaryAmount(state, state.showFullAmount) ?: "",
             dimmed = state.dimmed
         )
     }
@@ -157,13 +157,8 @@ class BalanceViewModel(
     private fun getSecondaryAmount(
         totalState: TotalService.State.Visible,
         fullFormat: Boolean
-    ) = totalState.coinValue?.let {
-        if (fullFormat) {
-            "≈" + App.numberFormatter.formatCoinFull(it.value, it.coin.code, it.decimal)
-        } else {
-            "≈" + App.numberFormatter.formatCoinShort(it.value, it.coin.code, it.decimal)
-        }
-    }
+    ) = null
+
 
     override fun createState() = BalanceUiState(
         balanceViewItems = balanceViewItems,
