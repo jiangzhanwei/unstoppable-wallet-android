@@ -32,7 +32,7 @@ fun BalanceNoAccount(navController: NavController) {
             iconTint = ComposeAppTheme.colors.grey,
             buttonTitle = stringResource(R.string.ManageAccounts_CreateNewWallet),
             buttonTitle2 = stringResource(R.string.ManageAccounts_ImportWallet),
-            buttonTitle3 = stringResource(R.string.ManageAccounts_WatchAddress),
+//            buttonTitle3 = stringResource(R.string.ManageAccounts_WatchAddress),
             onClick = {
                 navController.navigateWithTermsAccepted {
                     navController.slideFromRight(R.id.createAccountFragment)
@@ -47,11 +47,11 @@ fun BalanceNoAccount(navController: NavController) {
                     stat(page = StatPage.Balance, event = StatEvent.Open(StatPage.ImportWallet))
                 }
             },
-            onClick3 = {
-                navController.slideFromRight(R.id.watchAddressFragment)
-
-                stat(page = StatPage.Balance, event = StatEvent.Open(StatPage.WatchWallet))
-            }
+//            onClick3 = {
+//                navController.slideFromRight(R.id.watchAddressFragment)
+//
+//                stat(page = StatPage.Balance, event = StatEvent.Open(StatPage.WatchWallet))
+//            }
         )
     }
 }

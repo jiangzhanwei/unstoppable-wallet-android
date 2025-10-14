@@ -114,14 +114,14 @@ fun ManageAccountsScreen(navController: NavController, mode: ManageAccountsModul
                             event = StatEvent.Open(StatPage.ImportWallet)
                         )
                     },
-                    ActionViewItem(R.drawable.icon_binocule_20, R.string.ManageAccounts_WatchAddress) {
-                        navController.slideFromRight(R.id.watchAddressFragment, args)
-
-                        stat(
-                            page = StatPage.ManageWallets,
-                            event = StatEvent.Open(StatPage.WatchWallet)
-                        )
-                    }
+//                    ActionViewItem(R.drawable.icon_binocule_20, R.string.ManageAccounts_WatchAddress) {
+//                        navController.slideFromRight(R.id.watchAddressFragment, args)
+//
+//                        stat(
+//                            page = StatPage.ManageWallets,
+//                            event = StatEvent.Open(StatPage.WatchWallet)
+//                        )
+//                    }
                 )
                 CellUniversalLawrenceSection(actions) {
                     RowUniversal(

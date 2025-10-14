@@ -171,182 +171,182 @@ fun AppearanceScreen(navController: NavController) {
                     }
                 )
 
-                VSpacer(24.dp)
-
-                HeaderText(text = stringResource(id = R.string.Appearance_MarketsTab))
-                CellUniversalLawrenceSection(
-                    listOf(
-                        {
-                            SettingUniversalCell(
-                                title = R.string.Appearance_HideMarketsTab,
-                                subtitle = R.string.Appearance_HideMarketsTab_Tip,
-                            ) {
-                                HsSwitch(
-                                    checked = uiState.marketsTabHidden,
-                                    onCheckedChange = {
-                                        viewModel.onSetMarketTabsHidden(it)
-                                    }
-                                )
-                            }
-                        },
-                        {
-                            SettingUniversalCell(
-                                title = R.string.Appearance_PriceChangeInterval,
-                                subtitle = R.string.Appearance_PriceChangeInterval_Tip,
-                                onClick = { openPriceChangeIntervalSelector = true }
-                            ) {
-                                subhead1_leah(
-                                    text = uiState.priceChangeInterval.title.getString(),
-                                    maxLines = 1,
-                                    modifier = Modifier.padding(horizontal = 8.dp)
-                                )
-
-                                Image(
-                                    modifier = Modifier.size(20.dp),
-                                    painter = painterResource(id = R.drawable.ic_down_arrow_20),
-                                    contentDescription = null,
-                                )
-                            }
-                        }
-                    )
-                )
-
-                AnimatedVisibility(visible = !uiState.marketsTabHidden) {
-                    Column {
-                        VSpacer(32.dp)
-                        CellUniversalLawrenceSection(
-                            listOf {
-                                SettingUniversalCell(
-                                    title = R.string.Settings_LaunchScreen,
-                                    subtitle = R.string.Settings_LaunchScreen_Tip,
-                                    onClick = { openLaunchPageSelector = true }
-                                ) {
-                                    subhead1_leah(
-                                        text = uiState.selectedLaunchScreen.title.getString(),
-                                        maxLines = 1,
-                                        modifier = Modifier.padding(horizontal = 8.dp)
-                                    )
-
-                                    Image(
-                                        modifier = Modifier.size(20.dp),
-                                        painter = painterResource(id = R.drawable.ic_down_arrow_20),
-                                        contentDescription = null,
-                                    )
-                                }
-                            }
-                        )
-                    }
-                }
-
-                VSpacer(24.dp)
-                HeaderText(text = stringResource(id = R.string.Appearance_BalanceTab))
-                CellUniversalLawrenceSection(
-                    listOf(
-                        {
-                            SettingUniversalCell(
-                                title = R.string.Appearance_HideBalanceTabButtons,
-                                subtitle = R.string.Appearance_HideBalanceTabButtons_Tip,
-                            ) {
-                                HsSwitch(
-                                    checked = uiState.balanceTabButtonsHidden,
-                                    onCheckedChange = {
-                                        viewModel.onSetBalanceTabButtonsHidden(it)
-                                    }
-                                )
-                            }
-                        },
-                        {
-                            SettingUniversalCell(
-                                title = R.string.Appearance_AmountRounding,
-                                subtitle = R.string.Appearance_AmountRounding_Tip,
-                            ) {
-                                HsSwitch(
-                                    checked = uiState.amountRoundingEnabled,
-                                    onCheckedChange = {
-                                        viewModel.onAmountRoundingToggle(it)
-                                    }
-                                )
-                            }
-                        },
-                        {
-                            SettingUniversalCell(
-                                title = R.string.Appearance_BalanceValue,
-                                subtitle = R.string.Appearance_BalanceValue_Tip,
-                                onClick = { openBalanceValueSelector = true }
-                            ) {
-                                subhead1_leah(
-                                    text = uiState.selectedBalanceViewType.title.getString(),
-                                    maxLines = 1,
-                                    modifier = Modifier.padding(horizontal = 8.dp)
-                                )
-
-                                Image(
-                                    modifier = Modifier.size(20.dp),
-                                    painter = painterResource(id = R.drawable.ic_down_arrow_20),
-                                    contentDescription = null,
-                                )
-                            }
-                        }
-                    )
-                )
-
-                VSpacer(24.dp)
-                HeaderText(text = stringResource(id = R.string.Appearance_AppIcon))
-                AppIconSection(uiState.appIconOptions) {
-                    scope.launch {
-                        selectedAppIcon = it
-                        sheetState.show()
-                    }
-                }
+//                VSpacer(24.dp)
+//
+//                HeaderText(text = stringResource(id = R.string.Appearance_MarketsTab))
+//                CellUniversalLawrenceSection(
+//                    listOf(
+//                        {
+//                            SettingUniversalCell(
+//                                title = R.string.Appearance_HideMarketsTab,
+//                                subtitle = R.string.Appearance_HideMarketsTab_Tip,
+//                            ) {
+//                                HsSwitch(
+//                                    checked = uiState.marketsTabHidden,
+//                                    onCheckedChange = {
+//                                        viewModel.onSetMarketTabsHidden(it)
+//                                    }
+//                                )
+//                            }
+//                        },
+//                        {
+//                            SettingUniversalCell(
+//                                title = R.string.Appearance_PriceChangeInterval,
+//                                subtitle = R.string.Appearance_PriceChangeInterval_Tip,
+//                                onClick = { openPriceChangeIntervalSelector = true }
+//                            ) {
+//                                subhead1_leah(
+//                                    text = uiState.priceChangeInterval.title.getString(),
+//                                    maxLines = 1,
+//                                    modifier = Modifier.padding(horizontal = 8.dp)
+//                                )
+//
+//                                Image(
+//                                    modifier = Modifier.size(20.dp),
+//                                    painter = painterResource(id = R.drawable.ic_down_arrow_20),
+//                                    contentDescription = null,
+//                                )
+//                            }
+//                        }
+//                    )
+//                )
+//
+//                AnimatedVisibility(visible = !uiState.marketsTabHidden) {
+//                    Column {
+//                        VSpacer(32.dp)
+//                        CellUniversalLawrenceSection(
+//                            listOf {
+//                                SettingUniversalCell(
+//                                    title = R.string.Settings_LaunchScreen,
+//                                    subtitle = R.string.Settings_LaunchScreen_Tip,
+//                                    onClick = { openLaunchPageSelector = true }
+//                                ) {
+//                                    subhead1_leah(
+//                                        text = uiState.selectedLaunchScreen.title.getString(),
+//                                        maxLines = 1,
+//                                        modifier = Modifier.padding(horizontal = 8.dp)
+//                                    )
+//
+//                                    Image(
+//                                        modifier = Modifier.size(20.dp),
+//                                        painter = painterResource(id = R.drawable.ic_down_arrow_20),
+//                                        contentDescription = null,
+//                                    )
+//                                }
+//                            }
+//                        )
+//                    }
+//                }
+//
+//                VSpacer(24.dp)
+//                HeaderText(text = stringResource(id = R.string.Appearance_BalanceTab))
+//                CellUniversalLawrenceSection(
+//                    listOf(
+//                        {
+//                            SettingUniversalCell(
+//                                title = R.string.Appearance_HideBalanceTabButtons,
+//                                subtitle = R.string.Appearance_HideBalanceTabButtons_Tip,
+//                            ) {
+//                                HsSwitch(
+//                                    checked = uiState.balanceTabButtonsHidden,
+//                                    onCheckedChange = {
+//                                        viewModel.onSetBalanceTabButtonsHidden(it)
+//                                    }
+//                                )
+//                            }
+//                        },
+//                        {
+//                            SettingUniversalCell(
+//                                title = R.string.Appearance_AmountRounding,
+//                                subtitle = R.string.Appearance_AmountRounding_Tip,
+//                            ) {
+//                                HsSwitch(
+//                                    checked = uiState.amountRoundingEnabled,
+//                                    onCheckedChange = {
+//                                        viewModel.onAmountRoundingToggle(it)
+//                                    }
+//                                )
+//                            }
+//                        },
+//                        {
+//                            SettingUniversalCell(
+//                                title = R.string.Appearance_BalanceValue,
+//                                subtitle = R.string.Appearance_BalanceValue_Tip,
+//                                onClick = { openBalanceValueSelector = true }
+//                            ) {
+//                                subhead1_leah(
+//                                    text = uiState.selectedBalanceViewType.title.getString(),
+//                                    maxLines = 1,
+//                                    modifier = Modifier.padding(horizontal = 8.dp)
+//                                )
+//
+//                                Image(
+//                                    modifier = Modifier.size(20.dp),
+//                                    painter = painterResource(id = R.drawable.ic_down_arrow_20),
+//                                    contentDescription = null,
+//                                )
+//                            }
+//                        }
+//                    )
+//                )
+//
+//                VSpacer(24.dp)
+//                HeaderText(text = stringResource(id = R.string.Appearance_AppIcon))
+//                AppIconSection(uiState.appIconOptions) {
+//                    scope.launch {
+//                        selectedAppIcon = it
+//                        sheetState.show()
+//                    }
+//                }
 
                 VSpacer(32.dp)
             }
         }
         //Dialogs
-        if (openThemeSelector) {
-            AlertGroup(
-                stringResource(R.string.Settings_Theme),
-                uiState.themeOptions,
-                { selected ->
-                    viewModel.onEnterTheme(selected)
-                    openThemeSelector = false
-                },
-                { openThemeSelector = false }
-            )
-        }
-        if (openLaunchPageSelector) {
-            AlertGroup(
-                stringResource(R.string.Settings_LaunchScreen),
-                uiState.launchScreenOptions,
-                { selected ->
-                    viewModel.onEnterLaunchPage(selected)
-                    openLaunchPageSelector = false
-                },
-                { openLaunchPageSelector = false }
-            )
-        }
-        if (openBalanceValueSelector) {
-            AlertGroup(
-                stringResource(R.string.Appearance_BalanceValue),
-                uiState.balanceViewTypeOptions,
-                { selected ->
-                    viewModel.onEnterBalanceViewType(selected)
-                    openBalanceValueSelector = false
-                },
-                { openBalanceValueSelector = false }
-            )
-        }
-        if (openPriceChangeIntervalSelector) {
-            AlertGroup(
-                stringResource(R.string.Appearance_PriceChangeInterval),
-                uiState.priceChangeIntervalOptions,
-                { selected ->
-                    viewModel.onSetPriceChangeInterval(selected)
-                    openPriceChangeIntervalSelector = false
-                },
-                { openPriceChangeIntervalSelector = false }
-            )
-        }
+//        if (openThemeSelector) {
+//            AlertGroup(
+//                stringResource(R.string.Settings_Theme),
+//                uiState.themeOptions,
+//                { selected ->
+//                    viewModel.onEnterTheme(selected)
+//                    openThemeSelector = false
+//                },
+//                { openThemeSelector = false }
+//            )
+//        }
+//        if (openLaunchPageSelector) {
+//            AlertGroup(
+//                stringResource(R.string.Settings_LaunchScreen),
+//                uiState.launchScreenOptions,
+//                { selected ->
+//                    viewModel.onEnterLaunchPage(selected)
+//                    openLaunchPageSelector = false
+//                },
+//                { openLaunchPageSelector = false }
+//            )
+//        }
+//        if (openBalanceValueSelector) {
+//            AlertGroup(
+//                stringResource(R.string.Appearance_BalanceValue),
+//                uiState.balanceViewTypeOptions,
+//                { selected ->
+//                    viewModel.onEnterBalanceViewType(selected)
+//                    openBalanceValueSelector = false
+//                },
+//                { openBalanceValueSelector = false }
+//            )
+//        }
+//        if (openPriceChangeIntervalSelector) {
+//            AlertGroup(
+//                stringResource(R.string.Appearance_PriceChangeInterval),
+//                uiState.priceChangeIntervalOptions,
+//                { selected ->
+//                    viewModel.onSetPriceChangeInterval(selected)
+//                    openPriceChangeIntervalSelector = false
+//                },
+//                { openPriceChangeIntervalSelector = false }
+//            )
+//        }
     }
 }
 
