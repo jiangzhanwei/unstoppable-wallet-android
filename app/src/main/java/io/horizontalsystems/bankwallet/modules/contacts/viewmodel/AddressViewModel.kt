@@ -36,10 +36,12 @@ class AddressViewModel(
         TranslatableString.ResString(R.string.Contacts_AddAddress)
     else
         TranslatableString.PlainString(contactAddress.blockchain.name)
+
     private var address = contactAddress?.address ?: ""
     private val editingAddress = contactAddress
     private var addressState: DataState<Address>? =
         contactAddress?.address?.let { DataState.Success(Address(it)) }
+
     private val availableBlockchains: List<Blockchain>
 
     init {
@@ -66,24 +68,25 @@ class AddressViewModel(
         }
     }
 
-    private var blockchain = contactAddress?.blockchain ?: availableBlockchains.first()
+    // ✅ 仅修改这里，优先选择 Solana
+    private var blockchain: Blockchain = contactAddress?.blockchain
+        ?: availableBlockchains.firstOrNull { it.type == BlockchainType.Solana }
+        ?: availableBlockchains.firstOrNull()
+        ?: throw IllegalStateException("No available blockchain found")
+
     private var addressParser: AddressParserChain =
         addressHandlerFactory.parserChain(blockchain.type, true)
 
     fun onEnterAddress(address: String) {
         this.address = address
-
         emitState()
-
         validateAddress(address)
     }
 
     fun onEnterBlockchain(blockchain: Blockchain) {
         this.blockchain = blockchain
         this.addressParser = addressHandlerFactory.parserChain(blockchain.type, true)
-
         emitState()
-
         validateAddress(address)
     }
 
