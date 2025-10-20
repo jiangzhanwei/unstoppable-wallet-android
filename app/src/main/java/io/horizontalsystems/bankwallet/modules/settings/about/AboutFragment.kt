@@ -106,69 +106,70 @@ private fun SettingSections(
         listOf {
             HsSettingCell(
                 title = R.string.SettingsAboutApp_AppVersion,
-                icon = R.drawable.ic_info_20,
+                icon = 0,
                 value = viewModel.appVersion,
-                onClick = {
-                    navController.navigate(ReleaseNotesPage)
-
-                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.WhatsNew))
-                }
+                onClick = {}
+//                onClick = {
+//                    navController.navigate(ReleaseNotesPage)
+//
+//                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.WhatsNew))
+//                }
             )
         }
     )
 
     Spacer(Modifier.height(32.dp))
 
-    CellUniversalLawrenceSection(
-        listOf({
-            HsSettingCell(
-                R.string.Settings_AppStatus,
-                R.drawable.ic_app_status,
-                onClick = {
-                    navController.navigate(AppStatusPage)
-
-                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.AppStatus))
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Settings_Terms,
-                R.drawable.ic_terms_20,
-                showAlert = termsShowAlert,
-                onClick = {
-                    navController.navigate(TermsPage)
-
-                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.Terms))
-                }
-            )
-        })
-    )
-
-    Spacer(Modifier.height(32.dp))
-
-    CellUniversalLawrenceSection(
-        listOf({
-            HsSettingCell(
-                R.string.SettingsAboutApp_Github,
-                R.drawable.ic_github_20,
-                onClick = {
-                    LinkHelper.openLinkInAppBrowser(context, viewModel.githubLink)
-
-                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.ExternalGithub))
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.SettingsAboutApp_Site,
-                R.drawable.ic_globe,
-                onClick = {
-                    LinkHelper.openLinkInAppBrowser(context, viewModel.appWebPageLink)
-
-                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.ExternalWebsite))
-                }
-            )
-        })
-    )
-
-    VSpacer(32.dp)
+//    CellUniversalLawrenceSection(
+//        listOf({
+//            HsSettingCell(
+//                R.string.Settings_AppStatus,
+//                R.drawable.ic_app_status,
+//                onClick = {
+//                    navController.navigate(AppStatusPage)
+//
+//                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.AppStatus))
+//                }
+//            )
+//        }, {
+//            HsSettingCell(
+//                R.string.Settings_Terms,
+//                R.drawable.ic_terms_20,
+//                showAlert = termsShowAlert,
+//                onClick = {
+//                    navController.navigate(TermsPage)
+//
+//                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.Terms))
+//                }
+//            )
+//        })
+//    )
+//
+//    Spacer(Modifier.height(32.dp))
+//
+//    CellUniversalLawrenceSection(
+//        listOf({
+//            HsSettingCell(
+//                R.string.SettingsAboutApp_Github,
+//                R.drawable.ic_github_20,
+//                onClick = {
+//                    LinkHelper.openLinkInAppBrowser(context, viewModel.githubLink)
+//
+//                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.ExternalGithub))
+//                }
+//            )
+//        }, {
+//            HsSettingCell(
+//                R.string.SettingsAboutApp_Site,
+//                R.drawable.ic_globe,
+//                onClick = {
+//                    LinkHelper.openLinkInAppBrowser(context, viewModel.appWebPageLink)
+//
+//                    stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.ExternalWebsite))
+//                }
+//            )
+//        })
+//    )
+//
+//    VSpacer(32.dp)
 }
