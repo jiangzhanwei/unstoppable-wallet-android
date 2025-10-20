@@ -30,7 +30,11 @@ fun BlockchainSelectorScreen(
     onSelectBlockchain: (Blockchain) -> Unit,
     onNavigateToBack: () -> Unit
 ) {
-    var selectedItem by remember { mutableStateOf(selectedBlockchain) }
+    // 过滤出 Solana 链
+    val solanaList = blockchains.filter { it.uid.equals("solana", ignoreCase = true) }
+
+    // 默认选中 Solana，如果列表里没有 Solana，则回退到传入的 selectedBlockchain
+    var selectedItem by remember { mutableStateOf(solanaList.firstOrNull() ?: selectedBlockchain) }
 
     Scaffold(
         topBar = {
@@ -50,7 +54,7 @@ fun BlockchainSelectorScreen(
         ) {
             Spacer(Modifier.height(12.dp))
             SectionUniversalLawrence {
-                blockchains.forEachIndexed { index, item ->
+                solanaList.forEachIndexed { index, item ->
                     CellBlockchainChecked(
                         borderTop = index != 0,
                         blockchain = item,
