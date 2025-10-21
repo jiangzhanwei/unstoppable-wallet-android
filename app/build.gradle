@@ -13,8 +13,8 @@ android {
         compileSdk compile_sdk_version
         minSdkVersion min_sdk_version
         targetSdkVersion compile_sdk_version
-        versionCode 144
-        versionName "0.45.1"
+        versionCode 1
+        versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "de", "es", "en", "fa", "fr", "ko", "pt", "pt-rBR", "ru", "tr", "zh"
 

@@ -106,9 +106,10 @@ private fun SettingSections(
         listOf {
             HsSettingCell(
                 title = R.string.SettingsAboutApp_AppVersion,
-                icon = 0,
-                value = viewModel.appVersion,
-                onClick = {}
+                icon = R.drawable.ic_info_20,
+                value = viewModel.appVersion,   // 显示版本号
+                onClick = {}                    // 保留可点击效果
+//                value = viewModel.appVersion,
 //                onClick = {
 //                    navController.navigate(ReleaseNotesPage)
 //
