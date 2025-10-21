@@ -62,42 +62,42 @@ fun ManageAccountScreen(navController: NavController, account: Account) {
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(Modifier.height(12.dp))
-            viewModel.viewState.evmPrivateKey?.let { key ->
-                KeyActionItem(
-                    title = stringResource(id = R.string.PrivateKeys_EvmPrivateKey),
-                    description = stringResource(R.string.PrivateKeys_EvmPrivateKeyDescription)
-                ) {
-                    navController.authorizedAction {
-                        navController.slideFromRight(
-                            R.id.evmPrivateKeyFragment,
-                            EvmPrivateKeyFragment.Input(key)
-                        )
-
-                        stat(
-                            page = StatPage.PrivateKeys,
-                            event = StatEvent.Open(StatPage.EvmPrivateKey)
-                        )
-                    }
-                }
-            }
-            viewModel.viewState.stellarSecretKey?.let { key ->
-                KeyActionItem(
-                    title = stringResource(id = R.string.PrivateKeys_StellarSecretKey),
-                    description = stringResource(R.string.PrivateKeys_StellarSecretKeyDescription)
-                ) {
-                    navController.authorizedAction {
-                        navController.slideFromRight(
-                            R.id.stellarSecretKeyFragment,
-                            StellarSecretKeyFragment.Input(key)
-                        )
-
-                        stat(
-                            page = StatPage.PrivateKeys,
-                            event = StatEvent.Open(StatPage.StellarSecretKey)
-                        )
-                    }
-                }
-            }
+//            viewModel.viewState.evmPrivateKey?.let { key ->
+//                KeyActionItem(
+//                    title = stringResource(id = R.string.PrivateKeys_EvmPrivateKey),
+//                    description = stringResource(R.string.PrivateKeys_EvmPrivateKeyDescription)
+//                ) {
+//                    navController.authorizedAction {
+//                        navController.slideFromRight(
+//                            R.id.evmPrivateKeyFragment,
+//                            EvmPrivateKeyFragment.Input(key)
+//                        )
+//
+//                        stat(
+//                            page = StatPage.PrivateKeys,
+//                            event = StatEvent.Open(StatPage.EvmPrivateKey)
+//                        )
+//                    }
+//                }
+//            }
+//            viewModel.viewState.stellarSecretKey?.let { key ->
+//                KeyActionItem(
+//                    title = stringResource(id = R.string.PrivateKeys_StellarSecretKey),
+//                    description = stringResource(R.string.PrivateKeys_StellarSecretKeyDescription)
+//                ) {
+//                    navController.authorizedAction {
+//                        navController.slideFromRight(
+//                            R.id.stellarSecretKeyFragment,
+//                            StellarSecretKeyFragment.Input(key)
+//                        )
+//
+//                        stat(
+//                            page = StatPage.PrivateKeys,
+//                            event = StatEvent.Open(StatPage.StellarSecretKey)
+//                        )
+//                    }
+//                }
+//            }
             viewModel.viewState.bip32RootKey?.let { key ->
                 KeyActionItem(
                     title = stringResource(id = R.string.PrivateKeys_Bip32RootKey),
@@ -119,42 +119,42 @@ fun ManageAccountScreen(navController: NavController, account: Account) {
                     }
                 }
             }
-            viewModel.viewState.accountExtendedPrivateKey?.let { key ->
-                KeyActionItem(
-                    title = stringResource(id = R.string.PrivateKeys_AccountExtendedPrivateKey),
-                    description = stringResource(id = R.string.PrivateKeys_AccountExtendedPrivateKeyDescription),
-                ) {
-                    navController.authorizedAction {
-                        navController.slideFromRight(
-                            R.id.showExtendedKeyFragment,
-                            ShowExtendedKeyFragment.Input(key.hdKey, key.displayKeyType)
-                        )
-
-                        stat(
-                            page = StatPage.PrivateKeys,
-                            event = StatEvent.Open(StatPage.AccountExtendedPrivateKey)
-                        )
-                    }
-                }
-            }
-            viewModel.viewState.moneroKeys?.let { moneroKeys ->
-                KeyActionItem(
-                    title = stringResource(id = R.string.PrivateKeys_MoneroPrivateKey),
-                    description = stringResource(id = R.string.PrivateKeys_MoneroPrivateKeyDescription),
-                ) {
-                    navController.authorizedAction {
-                        navController.slideFromRight(
-                            R.id.showMoneroKeyFragment,
-                            ShowMoneroKeyFragment.Input(moneroKeys)
-                        )
-
-                        stat(
-                            page = StatPage.PrivateKeys,
-                            event = StatEvent.Open(StatPage.MoneroPrivateKey)
-                        )
-                    }
-                }
-            }
+//            viewModel.viewState.accountExtendedPrivateKey?.let { key ->
+//                KeyActionItem(
+//                    title = stringResource(id = R.string.PrivateKeys_AccountExtendedPrivateKey),
+//                    description = stringResource(id = R.string.PrivateKeys_AccountExtendedPrivateKeyDescription),
+//                ) {
+//                    navController.authorizedAction {
+//                        navController.slideFromRight(
+//                            R.id.showExtendedKeyFragment,
+//                            ShowExtendedKeyFragment.Input(key.hdKey, key.displayKeyType)
+//                        )
+//
+//                        stat(
+//                            page = StatPage.PrivateKeys,
+//                            event = StatEvent.Open(StatPage.AccountExtendedPrivateKey)
+//                        )
+//                    }
+//                }
+//            }
+//            viewModel.viewState.moneroKeys?.let { moneroKeys ->
+//                KeyActionItem(
+//                    title = stringResource(id = R.string.PrivateKeys_MoneroPrivateKey),
+//                    description = stringResource(id = R.string.PrivateKeys_MoneroPrivateKeyDescription),
+//                ) {
+//                    navController.authorizedAction {
+//                        navController.slideFromRight(
+//                            R.id.showMoneroKeyFragment,
+//                            ShowMoneroKeyFragment.Input(moneroKeys)
+//                        )
+//
+//                        stat(
+//                            page = StatPage.PrivateKeys,
+//                            event = StatEvent.Open(StatPage.MoneroPrivateKey)
+//                        )
+//                    }
+//                }
+//            }
         }
     }
 }

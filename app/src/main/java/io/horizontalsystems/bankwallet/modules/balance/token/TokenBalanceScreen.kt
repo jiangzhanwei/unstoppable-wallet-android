@@ -499,20 +499,20 @@ private fun ButtonsRow(
     onClickReceive: () -> Unit
 ) {
     ButtonsGroup {
-        BalanceActionButton(
-            variant = ButtonVariant.Primary,
-            icon = R.drawable.ic_balance_chart_24,
-            title = stringResource(R.string.Coin_Chart),
-            enabled = !viewItem.wallet.token.isCustom,
-            onClick = {
-                val coinUid = viewItem.wallet.coin.uid
-                val arguments = CoinFragment.Input(coinUid)
-
-                navController.slideFromRight(R.id.coinFragment, arguments)
-
-                stat(page = StatPage.TokenPage, event = StatEvent.OpenCoin(coinUid))
-            },
-        )
+//        BalanceActionButton(
+//            variant = ButtonVariant.Primary,
+//            icon = R.drawable.ic_balance_chart_24,
+//            title = stringResource(R.string.Coin_Chart),
+//            enabled = !viewItem.wallet.token.isCustom,
+//            onClick = {
+//                val coinUid = viewItem.wallet.coin.uid
+//                val arguments = CoinFragment.Input(coinUid)
+//
+//                navController.slideFromRight(R.id.coinFragment, arguments)
+//
+//                stat(page = StatPage.TokenPage, event = StatEvent.OpenCoin(coinUid))
+//            },
+//        )
         BalanceActionButton(
             variant = ButtonVariant.Secondary,
             icon = R.drawable.ic_arrow_down_24,

@@ -321,22 +321,22 @@ private fun KeyActions(
             }
 
             KeyAction.PublicKeys -> {
-                actionItems.add {
-                    AccountActionItem(
-                        title = stringResource(id = R.string.PublicKeys_Title),
-                        icon = painterResource(id = R.drawable.icon_binocule_20)
-                    ) {
-                        navController.slideFromRight(
-                            R.id.publicKeysFragment,
-                            viewModel.account
-                        )
-
-                        stat(
-                            page = StatPage.ManageWallet,
-                            event = StatEvent.Open(StatPage.PublicKeys)
-                        )
-                    }
-                }
+//                actionItems.add {
+//                    AccountActionItem(
+//                        title = stringResource(id = R.string.PublicKeys_Title),
+//                        icon = painterResource(id = R.drawable.icon_binocule_20)
+//                    ) {
+//                        navController.slideFromRight(
+//                            R.id.publicKeysFragment,
+//                            viewModel.account
+//                        )
+//
+//                        stat(
+//                            page = StatPage.ManageWallet,
+//                            event = StatEvent.Open(StatPage.PublicKeys)
+//                        )
+//                    }
+//                }
             }
         }
     }
