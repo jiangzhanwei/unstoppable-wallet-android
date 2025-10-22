@@ -98,27 +98,27 @@ fun ManageAccountScreen(navController: NavController, account: Account) {
 //                    }
 //                }
 //            }
-            viewModel.viewState.bip32RootKey?.let { key ->
-                KeyActionItem(
-                    title = stringResource(id = R.string.PrivateKeys_Bip32RootKey),
-                    description = stringResource(id = R.string.PrivateKeys_Bip32RootKeyDescription),
-                ) {
-                    navController.authorizedAction {
-                        navController.slideFromRight(
-                            R.id.showExtendedKeyFragment,
-                            ShowExtendedKeyFragment.Input(
-                                key.hdKey,
-                                key.displayKeyType
-                            )
-                        )
-
-                        stat(
-                            page = StatPage.PrivateKeys,
-                            event = StatEvent.Open(StatPage.Bip32RootKey)
-                        )
-                    }
-                }
-            }
+//            viewModel.viewState.bip32RootKey?.let { key ->
+//                KeyActionItem(
+//                    title = stringResource(id = R.string.PrivateKeys_Bip32RootKey),
+//                    description = stringResource(id = R.string.PrivateKeys_Bip32RootKeyDescription),
+//                ) {
+//                    navController.authorizedAction {
+//                        navController.slideFromRight(
+//                            R.id.showExtendedKeyFragment,
+//                            ShowExtendedKeyFragment.Input(
+//                                key.hdKey,
+//                                key.displayKeyType
+//                            )
+//                        )
+//
+//                        stat(
+//                            page = StatPage.PrivateKeys,
+//                            event = StatEvent.Open(StatPage.Bip32RootKey)
+//                        )
+//                    }
+//                }
+//            }
 //            viewModel.viewState.accountExtendedPrivateKey?.let { key ->
 //                KeyActionItem(
 //                    title = stringResource(id = R.string.PrivateKeys_AccountExtendedPrivateKey),

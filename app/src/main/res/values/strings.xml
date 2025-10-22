@@ -1461,7 +1461,7 @@
 
     <!-- Account Extended Keys -->
     <string name="ExtendedKey_Blockchain" translatable="false">Blockchain</string>
-    <string name="ExtendedKey_Purpose" translatable="false">SOLANA</string>
+    <string name="ExtendedKey_Purpose" translatable="false">Purpose</string>
     <string name="ExtendedKey_Account" translatable="false">Account</string>
     <string name="ExtendedKey_TapToShowPrivateKey">Tap to show private key</string>
     <string name="ExtendedKey_AccountInfo">To do</string>
@@ -1475,7 +1475,7 @@
     <string name="PrivateKeys_EvmPrivateKeyDescription">Grants full control over assets on EVM-based networks (e.g., Ethereum, BNB Smart Chain, Polygon, Avalanche) within this wallet.</string>
     <string name="PrivateKeys_StellarSecretKey">Stellar Secret Key</string>
     <string name="PrivateKeys_StellarSecretKeyDescription">Grants full control over assets on the Stellar network within this wallet.</string>
-    <string name="PrivateKeys_Bip32RootKey" translatable="false">SOLANA</string>
+    <string name="PrivateKeys_Bip32RootKey" translatable="false">BIP32 Root Key</string>
     <string name="PrivateKeys_Bip32RootKeyDescription">The master private key of the wallet. Grants full control over all derived accounts and assets.</string>
     <string name="PrivateKeys_AccountExtendedPrivateKey">Account Extended Private Key</string>
     <string name="PrivateKeys_AccountExtendedPrivateKeyDescription">Grants full control over Bitcoin and other UTXO-based assets (e.g., Litecoin, Bitcoin Cash, Dash) within this wallet.</string>

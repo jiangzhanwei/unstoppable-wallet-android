@@ -180,12 +180,11 @@ private fun ShowExtendedKeyScreen(
                             MenuItem(
                                 title = stringResource(R.string.ExtendedKey_Purpose),
                                 value = viewModel.purpose.name,
-//                                onClick = if (viewModel.displayKeyType == DisplayKeyType.Bip32RootKey || viewModel.displayKeyType.isDerivable) {
-//                                    { showPurposeSelectorDialog = true }
-//                                } else {
-//                                    null
-//                                }
-                                onClick = {}
+                                onClick = if (viewModel.displayKeyType == DisplayKeyType.Bip32RootKey || viewModel.displayKeyType.isDerivable) {
+                                    { showPurposeSelectorDialog = true }
+                                } else {
+                                    null
+                                }
                             )
                         }
                         if (viewModel.displayKeyType.isDerivable) {
