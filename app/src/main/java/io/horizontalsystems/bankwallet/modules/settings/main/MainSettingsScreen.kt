@@ -167,20 +167,20 @@ private fun SettingSections(
                 }
             )
         },
-//            {
-//            HsSettingCell(
-//                R.string.BlockchainSettings_Title,
-//                R.drawable.ic_blocks_20,
-//                onClick = {
-//                    navController.slideFromRight(R.id.blockchainSettingsFragment)
-//
-//                    stat(
-//                        page = StatPage.Settings,
-//                        event = StatEvent.Open(StatPage.BlockchainSettings)
-//                    )
-//                }
-//            )
-//        },
+            {
+            HsSettingCell(
+                R.string.BlockchainSettings_Title,
+                R.drawable.ic_blocks_20,
+                onClick = {
+                    navController.slideFromRight(R.id.blockchainSettingsFragment)
+
+                    stat(
+                        page = StatPage.Settings,
+                        event = StatEvent.Open(StatPage.BlockchainSettings)
+                    )
+                }
+            )
+        },
             {
             HsSettingCell(
                 R.string.Settings_SecurityCenter,

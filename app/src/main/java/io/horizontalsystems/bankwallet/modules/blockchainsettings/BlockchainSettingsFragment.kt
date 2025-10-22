@@ -50,13 +50,12 @@ private fun BlockchainSettingsScreen(
     navController: NavController,
     viewModel: BlockchainSettingsViewModel = viewModel(factory = BlockchainSettingsModule.Factory()),
 ) {
-
     Surface(color = ComposeAppTheme.colors.tyler) {
         Column(
             modifier = Modifier.navigationBarsPadding()
         ) {
             AppBar(
-                title = stringResource(R.string.BlockchainSettings_Title),
+                title = "Solana 设置",  // ✅ 改为 Solana 设置
                 navigationIcon = {
                     HsBackButton(onClick = { navController.popBackStack() })
                 },
@@ -68,31 +67,29 @@ private fun BlockchainSettingsScreen(
                     .verticalScroll(rememberScrollState()),
             ) {
                 Spacer(Modifier.height(12.dp))
+
+                // ✅ 仅保留 Solana 链
+                val solanaChains = viewModel.otherChains.filter {
+                    it.blockchainItem is BlockchainSettingsModule.BlockchainItem.Solana
+                }
+
                 BlockchainSettingsBlock(
-                    btcLikeChains = viewModel.btcLikeChains,
-                    otherChains = viewModel.otherChains,
+                    solanaChains = solanaChains,
                     navController = navController
                 )
+
                 Spacer(Modifier.height(44.dp))
             }
         }
     }
-
 }
 
 @Composable
 fun BlockchainSettingsBlock(
-    btcLikeChains: List<BlockchainSettingsModule.BlockchainViewItem>,
-    otherChains: List<BlockchainSettingsModule.BlockchainViewItem>,
+    solanaChains: List<BlockchainSettingsModule.BlockchainViewItem>,
     navController: NavController
 ) {
-    CellUniversalLawrenceSection(btcLikeChains) { item ->
-        BlockchainSettingCell(item) {
-            onClick(item, navController)
-        }
-    }
-    Spacer(Modifier.height(32.dp))
-    CellUniversalLawrenceSection(otherChains) { item ->
+    CellUniversalLawrenceSection(solanaChains) { item ->
         BlockchainSettingCell(item) {
             onClick(item, navController)
         }
@@ -104,24 +101,6 @@ private fun onClick(
     navController: NavController
 ) {
     when (item.blockchainItem) {
-        is BlockchainSettingsModule.BlockchainItem.Btc -> {
-            navController.slideFromBottom(R.id.btcBlockchainSettingsFragment, item.blockchainItem.blockchain)
-
-            stat(
-                page = StatPage.BlockchainSettings,
-                event = StatEvent.OpenBlockchainSettingsBtc(item.blockchainItem.blockchain.uid)
-            )
-        }
-
-        is BlockchainSettingsModule.BlockchainItem.Evm -> {
-            navController.slideFromBottom(R.id.evmNetworkFragment, item.blockchainItem.blockchain)
-
-            stat(
-                page = StatPage.BlockchainSettings,
-                event = StatEvent.OpenBlockchainSettingsEvm(item.blockchainItem.blockchain.uid)
-            )
-        }
-
         is BlockchainSettingsModule.BlockchainItem.Solana -> {
             navController.slideFromBottom(R.id.solanaNetworkFragment)
 
@@ -130,15 +109,7 @@ private fun onClick(
                 event = StatEvent.Open(StatPage.BlockchainSettingsSolana)
             )
         }
-
-        is BlockchainSettingsModule.BlockchainItem.Monero -> {
-            navController.slideFromBottom(R.id.moneroNetworkFragment)
-
-            stat(
-                page = StatPage.BlockchainSettings,
-                event = StatEvent.OpenBlockchainSettingsEvm(item.blockchainItem.blockchain.uid)
-            )
-        }
+        else -> { /* 不处理其他链 */ }
     }
 }
 
